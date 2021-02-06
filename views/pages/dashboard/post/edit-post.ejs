@@ -1,0 +1,90 @@
+<%- include('../../../partials/header.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %> 
+            </div>
+            <div class="col-md-10 my-5">
+                <div class="mx-5 card card-body">
+                    <h3 class="mb-2">Edit Your Post</h3>
+                    <form action="/posts/edit/<%= posts._id %> " method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Enter Your Post Title</label>
+                            <input 
+                                type="text" 
+                                name="title" 
+                                id="title" 
+                                class="form-control form-control-sm <%= errors.title ? 'is-invalid' : '' %>" 
+                                placeholder="Enter Your Post Title"
+                                value="<%= posts.title %>"
+                            >
+                            <div class="invalid-feedback"> <%= errors.title %>  </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tiny-mce-body">Enter Your Post Details</label>
+                            <textarea 
+                                name="body" 
+                                id="tiny-mce-body" 
+                                class="form-control form-control-sm <%= errors.body ? 'is-invalid' : '' %>" 
+                                placeholder="Enter Your Post Details"
+                            ><%= posts.body %></textarea>
+                            <div class="invalid-feedback"> <%= errors.body %>  </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tags">Enter Post Tags (Max: 10)</label>
+                            <input 
+                                type="text" 
+                                name="tags" 
+                                id="tags" 
+                                class="form-control form-control-sm <%= errors.tags ? 'is-invalid' : '' %>" 
+                                placeholder="tag1, tag2, tag3"
+                                value="<%= posts.tags %>"
+                            >
+                            <div class="invalid-feedback"> <%= errors.tags %>  </div>
+                        </div>
+
+                        <% if(posts.thumbnail) { %> 
+                            <div class="form-group">
+                                <label for="thumbnail">Post Thumbnail</label>
+                                <br>
+                                <img style="max-width: 500px" class="img-fluid mb-4" id="thumbnail" src="<%= posts.thumbnail %>" alt="Post Thumbnail">
+                            </div>
+                        <% } %> 
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" name="post_thumbnail" class="custom-file-input" id="inputGroupFile" accept="image/*">
+                                <label for="inputGroupFile" class="custom-file-label">Chose File</label>
+                            </div>
+                            <div class="invalid-feedback"> <%= errors.post_thumbnail %>  </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success btn-sm" value="Update Post">
+                            <a href="/posts/delete/<%= posts._id %>" class="btn btn-sm btn-danger mx-2">Delete</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <%- include('../../../partials/footer.ejs') %>
+
+    <script src="https://cdn.tiny.cloud/1/j73dcqjuc811910unuosntp3qqb0ezub44vo3uzvglmnsmk9/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="/scripts/tinymce.js"></script>
+    <script>
+        $('#inputGroupFile').on('change', function(e) {
+            let filename = e.target.files[0].name;
+            $(this).next('.custom-file-label').text('').text(filename)
+        })
+    </script>
+        </body>
+
+        </html>

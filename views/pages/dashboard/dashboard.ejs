@@ -1,0 +1,43 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %>
+            </div>
+            <div class="col-md-10 mt-5">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">Total Posts</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= profile.posts.length %> </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">Total Comments</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= commentCount %></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">Total Bookmarks</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= profile.bookmarks.length %></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../../partials/footer.ejs') %>
+
+        </body>
+
+        </html>

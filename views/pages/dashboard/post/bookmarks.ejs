@@ -1,0 +1,40 @@
+<%- include('../../../partials/header.ejs') %>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %> 
+            </div>
+            <div class="col-md-10 my-5">
+                <h4>All Bookmarked Posts List</h4>
+
+                <div class="row">
+                    <% if(profile.bookmarks.length > 0) { %> 
+                        <% for(let post of profile.bookmarks.reverse()) { %> 
+                            <div class="col-md-3 card mr-2">
+                                <img class="card-img-top" src="<%= post.thumbnail %>" alt="Post Image">
+                                <div class="card-body">
+                                    <p class="card-title"><a href="/explorer/<%= post._id %> "><%= post.title %></a></p>
+                                    <small class="text-muted">
+                                        <%= moment(post.createdAt) %>
+                                    </small>
+                                </div>
+                            </div>
+                        <% } %> 
+                    <% } else { %> 
+                        <div class="col-md-12">
+                            <div class="alert alert-danger text-center" role="alert">
+                                No Bookmarks Available
+                              </div>
+
+                        </div>
+                    <% } %> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <%- include('../../../partials/footer.ejs') %>
+        </body>
+
+        </html>

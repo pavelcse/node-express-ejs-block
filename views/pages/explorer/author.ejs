@@ -1,0 +1,86 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="">
+                    <div>
+                        <img class="img-thumbnail img-fluid" src="<%= author.profilePics %>" alt="">
+                    </div>
+                    <div class="">
+                        <span class="d-block">Name: <strong>
+                                <%= author.profile.name %>
+                            </strong></span>
+                        <span class="d-block">Title: <strong>
+                                <%= author.profile.title %>
+                            </strong></span>
+                        <span class="d-block">Bio: <strong>
+                                <%= author.profile.bio %>
+                            </strong></span>
+
+                        <div class="mt-2">
+                            Social Links:
+                            <% if(author.profile.links.website) { %>
+                                <span>
+                                    <a target="_blank" href="<%= author.profile.links.website %>">
+                                        <i class="fab fa-internet-explorer"></i>
+                                    </a>
+                                </span>
+                            <% } %>
+                            <% if(author.profile.links.facebook) { %>
+                                <span>
+                                    <a target="_blank" href="<%= author.profile.links.facebook %>">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                </span>
+                            <% } %>
+                            <% if(author.profile.links.twitter) { %>
+                                <span>
+                                    <a target="_blank" href="<%= author.profile.links.twitter %>">
+                                        <i class="fab fa-twitter-square"></i>
+                                    </a>
+                                </span>
+                            <% } %>
+                            <% if(author.profile.links.github) { %>
+                                <span>
+                                    <a target="_blank"
+                                        href="<%= author.profile.links.github %>">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </span>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5 mb-2 justify-content-around">
+                    <div class="col-md-12">
+                        <h4>Posted By <%= author.profile.name %> </h4>
+                        <hr>
+                    </div>
+                    <% if(author.profile.posts.length > 0) { %> 
+                        <% for(let post of author.profile.posts.reverse()) { %> 
+                            <div class="col-md-5 card">
+                                <img class="card-img-top" src="<%= post.thumbnail %>" alt="Post Image">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= post.title %></h5>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">
+                                        <%= moment(post.createdAt) %>, 
+                                        <%= post.readTime %>  
+                                    </small>
+                                </div>
+                            </div>
+                        <% } %> 
+                    <% } %> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../../partials/footer.ejs') %>
+
+        </body>
+
+        </html>
